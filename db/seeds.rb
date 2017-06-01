@@ -6,6 +6,12 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
-team = Team.create(name: "Suicide Squad")
+team = Team.find_or_create_by(name: "Suicide Squad")
 
-project = Project.create(title: "Phoenix Project", description: "It's on fire", team_id: team.id)
+project = Project.find_or_create_by(title: "Phoenix Project", description: "It's on fire", team_id: team.id)
+
+user = User.find_or_create_by(username: "jun")
+
+membership = user.team_memberships.create(team_id: team.id)
+
+puts user.teams
