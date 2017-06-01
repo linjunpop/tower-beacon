@@ -6,4 +6,6 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
-team = Team.create(name: "Team A")
+team = Team.create(name: "Suicide Squad")
+
+project = Project.create(title: "Phoenix Project", description: "It's on fire", team_id: team.id)
