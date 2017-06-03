@@ -7,4 +7,7 @@ class User < ApplicationRecord
     class_name: "Project::Access"
   has_many :projects,
     through: :project_accesses
+  has_many :created_todos,
+    class_name: "Todo",
+    foreign_key: "creator_id"
 end

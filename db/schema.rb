@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170602234314) do
+ActiveRecord::Schema.define(version: 20170603020624) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -53,6 +53,19 @@ ActiveRecord::Schema.define(version: 20170602234314) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "todos", force: :cascade do |t|
+    t.string "content", null: false
+    t.integer "status", default: 0, null: false
+    t.bigint "project_id", null: false
+    t.bigint "creator_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["creator_id"], name: "index_todos_on_creator_id"
+    t.index ["project_id", "creator_id"], name: "index_todos_on_project_id_and_creator_id"
+    t.index ["project_id"], name: "index_todos_on_project_id"
+    t.index ["status"], name: "index_todos_on_status"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "username"
     t.datetime "created_at", null: false
@@ -65,4 +78,6 @@ ActiveRecord::Schema.define(version: 20170602234314) do
   add_foreign_key "projects", "teams"
   add_foreign_key "team_memberships", "teams"
   add_foreign_key "team_memberships", "users"
+  add_foreign_key "todos", "projects"
+  add_foreign_key "todos", "users", column: "creator_id"
 end

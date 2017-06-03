@@ -7,4 +7,6 @@ class Project < ApplicationRecord
   has_many :members,
     through: :accesses,
     source: :user
+  has_many :todos,
+    dependent: :destroy
 end
