@@ -2,47 +2,61 @@ require 'test_helper'
 
 class TodosControllerTest < ActionDispatch::IntegrationTest
   setup do
+    @project = projects(:one)
     @todo = todos(:one)
   end
 
   test "should get index" do
-    get todos_url
+    get project_todos_url(@project)
     assert_response :success
   end
 
   test "should get new" do
-    get new_todo_url
+    get new_project_todo_url(@project)
     assert_response :success
   end
 
   test "should create todo" do
+    params = {
+      todo: {
+        content: @todo.content,
+        creator_id: @todo.creator_id,
+        project_id: @project.id,
+        status: @todo.status
+      }
+    }
+
     assert_difference('Todo.count') do
-      post todos_url, params: { todo: { content: @todo.content, creator_id: @todo.creator_id, project_id: @todo.project_id, status: @todo.status } }
+      post project_todos_url(@project), params: params
     end
 
-    assert_redirected_to todo_url(Todo.last)
-  end
-
-  test "should show todo" do
-    get todo_url(@todo)
-    assert_response :success
+    assert_redirected_to project_todos_url(@project)
   end
 
   test "should get edit" do
-    get edit_todo_url(@todo)
+    get edit_project_todo_url(@project, @todo)
     assert_response :success
   end
 
   test "should update todo" do
-    patch todo_url(@todo), params: { todo: { content: @todo.content, creator_id: @todo.creator_id, project_id: @todo.project_id, status: @todo.status } }
-    assert_redirected_to todo_url(@todo)
+    params = {
+      todo: {
+        content: @todo.content,
+        creator_id: @todo.creator_id,
+        project_id: @todo.project_id,
+        status: @todo.status
+      }
+    }
+
+    patch project_todo_url(@project, @todo), params: params
+    assert_redirected_to project_todos_url(@project)
   end
 
   test "should destroy todo" do
     assert_difference('Todo.count', -1) do
-      delete todo_url(@todo)
+      delete project_todo_url(@project, @todo)
     end
 
-    assert_redirected_to todos_url
+    assert_redirected_to project_todos_url(@project)
   end
 end
