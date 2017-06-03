@@ -10,12 +10,27 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170601141606) do
+ActiveRecord::Schema.define(version: 20170602234314) do
+
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
+  create_table "project_accesses", force: :cascade do |t|
+    t.bigint "project_id"
+    t.bigint "user_id"
+    t.integer "role", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["project_id", "user_id"], name: "index_project_accesses_on_project_id_and_user_id", unique: true
+    t.index ["project_id"], name: "index_project_accesses_on_project_id"
+    t.index ["role"], name: "index_project_accesses_on_role"
+    t.index ["user_id"], name: "index_project_accesses_on_user_id"
+  end
 
   create_table "projects", force: :cascade do |t|
     t.string "title"
     t.text "description"
-    t.integer "team_id"
+    t.bigint "team_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["team_id"], name: "index_projects_on_team_id"
@@ -23,8 +38,8 @@ ActiveRecord::Schema.define(version: 20170601141606) do
 
   create_table "team_memberships", force: :cascade do |t|
     t.string "team_memberships"
-    t.integer "user_id"
-    t.integer "team_id"
+    t.bigint "user_id"
+    t.bigint "team_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["team_id"], name: "index_team_memberships_on_team_id"
@@ -45,4 +60,9 @@ ActiveRecord::Schema.define(version: 20170601141606) do
     t.index ["username"], name: "index_users_on_username", unique: true
   end
 
+  add_foreign_key "project_accesses", "projects"
+  add_foreign_key "project_accesses", "users"
+  add_foreign_key "projects", "teams"
+  add_foreign_key "team_memberships", "teams"
+  add_foreign_key "team_memberships", "users"
 end

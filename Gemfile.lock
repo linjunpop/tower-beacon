@@ -1,5 +1,5 @@
 GEM
-  remote: https://rubygems.org/
+  remote: https://gems.ruby-china.org/
   specs:
     actioncable (5.1.1)
       actionpack (= 5.1.1)
@@ -61,6 +61,7 @@ GEM
       execjs
     coffee-script-source (1.12.2)
     concurrent-ruby (1.0.5)
+    database_cleaner (1.6.1)
     erubi (1.6.0)
     execjs (2.7.0)
     ffi (1.9.18)
@@ -175,6 +176,7 @@ DEPENDENCIES
   byebug
   capybara (~> 2.13)
   coffee-rails (~> 4.2)
+  database_cleaner
   jbuilder (~> 2.5)
   listen (>= 3.0.5, < 3.2)
   pg

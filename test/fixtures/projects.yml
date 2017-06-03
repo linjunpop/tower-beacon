@@ -1,11 +1,11 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  title: MyString
+  title: Project A
   description: MyText
   team: one
 
 two:
-  title: MyString
+  title: Project B
   description: MyText
   team: two

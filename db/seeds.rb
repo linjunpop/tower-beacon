@@ -11,7 +11,8 @@ team = Team.find_or_create_by(name: "Suicide Squad")
 project = Project.find_or_create_by(title: "Phoenix Project", description: "It's on fire", team_id: team.id)
 
 user = User.find_or_create_by(username: "jun")
+another_user = User.find_or_create_by(username: "bender")
 
-membership = user.team_memberships.create(team_id: team.id)
+membership = user.team_memberships.create!(team_id: team.id)
 
-puts user.teams
+accessment = project.accesses.create!(user_id: another_user.id, role: :guest)
