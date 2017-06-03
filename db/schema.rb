@@ -10,10 +10,25 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170603020624) do
+ActiveRecord::Schema.define(version: 20170603055945) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "events", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.string "action", null: false
+    t.bigint "target_id", null: false
+    t.string "target_type", null: false
+    t.bigint "project_id", null: false
+    t.json "meta", default: {}, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["project_id"], name: "index_events_on_project_id"
+    t.index ["target_type", "target_id"], name: "index_events_on_target_type_and_target_id"
+    t.index ["user_id", "project_id"], name: "index_events_on_user_id_and_project_id"
+    t.index ["user_id"], name: "index_events_on_user_id"
+  end
 
   create_table "project_accesses", force: :cascade do |t|
     t.bigint "project_id"
@@ -73,6 +88,8 @@ ActiveRecord::Schema.define(version: 20170603020624) do
     t.index ["username"], name: "index_users_on_username", unique: true
   end
 
+  add_foreign_key "events", "projects"
+  add_foreign_key "events", "users"
   add_foreign_key "project_accesses", "projects"
   add_foreign_key "project_accesses", "users"
   add_foreign_key "projects", "teams"
