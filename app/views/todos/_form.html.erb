@@ -18,17 +18,17 @@
 
   <div class="field">
     <%= form.label :status %>
-    <%= form.number_field :status, id: :todo_status %>
+    <%= form.select :status, Todo.statuses.map { |key, value| [key.humanize, key] } %>
   </div>
 
   <div class="field">
     <%= form.label :project_id %>
-    <%= form.text_field :project_id, id: :todo_project_id %>
+    <%= form.select :project_id, Project.pluck(:title, :id) %>
   </div>
 
   <div class="field">
     <%= form.label :creator_id %>
-    <%= form.text_field :creator_id, id: :todo_creator_id %>
+    <%= form.select :creator_id, User.pluck(:username, :id) %>
   </div>
 
   <div class="actions">
