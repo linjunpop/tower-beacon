@@ -2,9 +2,10 @@ Rails.application.routes.draw do
   resources :users
 
   resources :projects do
-    resources :todos, except: [:show]
+    resources :todos
   end
 
   resources :teams
-  # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
+
+  resources :events
 end

@@ -10,4 +10,8 @@ class User < ApplicationRecord
   has_many :created_todos,
     class_name: "Todo",
     foreign_key: "creator_id"
+
+  def display_name
+    self.username.humanize
+  end
 end
