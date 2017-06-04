@@ -4,6 +4,7 @@ class EventsController < ApplicationController
       Event
       .all
       .order(created_at: :desc)
+      .includes(:user, :target)
       .limit(100)
   end
 end

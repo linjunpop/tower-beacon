@@ -10,6 +10,14 @@ class TodoService
       todo
     end
 
+    def update_todo(todo, attrs)
+      if result = todo.update(attrs)
+        create_event("update", todo)
+      end
+
+      result
+    end
+
     private
 
     # TODO: this may async in a background job with retry.

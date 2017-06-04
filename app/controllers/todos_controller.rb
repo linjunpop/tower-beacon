@@ -46,7 +46,7 @@ class TodosController < ApplicationController
   # PATCH/PUT /todos/1.json
   def update
     respond_to do |format|
-      if @todo.update(todo_params)
+      if TodoService.update_todo(@todo, todo_params)
         format.html { redirect_to project_todos_path(@project), notice: 'Todo was successfully updated.' }
         format.json { render :show, status: :ok, location: @todo }
       else

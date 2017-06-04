@@ -17,4 +17,14 @@ class TodoServiceTest < ActiveSupport::TestCase
 
     assert todo.persisted? == true
   end
+
+  test "update a todo" do
+    attrs = {
+      content: "new content"
+    }
+
+    TodoService.update_todo(@todo, attrs)
+
+    assert @todo.content == "new content"
+  end
 end
