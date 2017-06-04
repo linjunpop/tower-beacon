@@ -27,4 +27,10 @@ class TodoServiceTest < ActiveSupport::TestCase
 
     assert @todo.content == "new content"
   end
+
+  test "soft destroy a todo" do
+    TodoService.destroy_todo(@todo)
+
+    assert @todo.deleted_at
+  end
 end

@@ -4,7 +4,7 @@ class Event < ApplicationRecord
 
   belongs_to :target, polymorphic: true
 
-  @actions = %w(create update)
+  @actions = %w(create update destroy)
 
   validates_inclusion_of :action, in: @actions
 end

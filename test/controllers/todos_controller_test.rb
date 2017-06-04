@@ -53,10 +53,9 @@ class TodosControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should destroy todo" do
-    assert_difference('Todo.count', -1) do
-      delete project_todo_url(@project, @todo)
-    end
+    delete project_todo_url(@project, @todo)
 
+    assert @todo.reload.deleted_at
     assert_redirected_to project_todos_url(@project)
   end
 end

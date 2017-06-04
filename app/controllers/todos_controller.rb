@@ -11,6 +11,7 @@ class TodosController < ApplicationController
       scoped
       .order(created_at: :desc)
       .where(status: params[:status])
+      .normal
   end
 
   # GET /todos/1
@@ -59,7 +60,7 @@ class TodosController < ApplicationController
   # DELETE /todos/1
   # DELETE /todos/1.json
   def destroy
-    @todo.destroy
+    TodoService.destroy_todo(@todo)
     respond_to do |format|
       format.html { redirect_to project_todos_url(@project), notice: 'Todo was successfully destroyed.' }
       format.json { head :no_content }

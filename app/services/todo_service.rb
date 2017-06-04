@@ -18,6 +18,14 @@ class TodoService
       result
     end
 
+    def destroy_todo(todo)
+      if result = todo.update(deleted_at: Time.zone.now)
+        create_event("destroy", todo)
+      end
+
+      result
+    end
+
     private
 
     # TODO: this may async in a background job with retry.

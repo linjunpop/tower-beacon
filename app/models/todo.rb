@@ -8,5 +8,8 @@ class Todo < ApplicationRecord
     done: 1
   }
 
+  scope :normal, -> { where(deleted_at: nil) }
+  scope :deleted, -> { where.not(deleted_at: nil) }
+
   validates_presence_of :content
 end
