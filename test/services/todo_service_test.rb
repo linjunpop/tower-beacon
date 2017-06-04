@@ -39,4 +39,11 @@ class TodoServiceTest < ActiveSupport::TestCase
 
     assert @todo.status == "done"
   end
+
+  test "update assignee" do
+    user = users(:two)
+    TodoService.assign_todo(@todo, user.id)
+
+    assert @todo.assignee_id == user.id
+  end
 end

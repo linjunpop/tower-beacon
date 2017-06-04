@@ -1,6 +1,6 @@
 class TodosController < ApplicationController
   before_action :set_project
-  before_action :set_todo, only: [:show, :edit, :update, :destroy, :mark_as_done]
+  before_action :set_todo, only: [:show, :edit, :update, :destroy, :mark_as_done, :assign]
 
   # GET /todos
   # GET /todos.json
@@ -77,6 +77,16 @@ class TodosController < ApplicationController
     end
   end
 
+  def assign
+    respond_to do |format|
+      if TodoService.assign_todo(@todo, assign_params[:assignee_id])
+        format.html { redirect_to project_todos_path(@project), notice: 'Todo was successfully updated.' }
+      else
+        format.html { render :edit }
+      end
+    end
+  end
+
   private
     def set_project
       # TODO should be current_user.projects.find(...)
@@ -95,5 +105,9 @@ class TodosController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def todo_params
       params.require(:todo).permit(:content, :status, :project_id, :creator_id)
+    end
+
+    def assign_params
+      params.require(:todo).permit(:assignee_id)
     end
 end

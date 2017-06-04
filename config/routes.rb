@@ -5,6 +5,7 @@ Rails.application.routes.draw do
     resources :todos do
       member do
         put :mark_as_done
+        put :assign
       end
     end
   end

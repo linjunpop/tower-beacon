@@ -1,0 +1,4 @@
+<%= form_with(model: [:assign, @project, todo], local: true, method: :put) do |form| %>
+  <%= form.select :assignee_id, User.pluck(:username, :id) %>
+  <%= form.submit "Assign" %>
+<% end %>

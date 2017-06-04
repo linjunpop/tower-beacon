@@ -34,6 +34,14 @@ class TodoService
       result
     end
 
+    def assign_todo(todo, assignee_id)
+      if result = todo.update(assignee_id: assignee_id)
+        create_event("update_assignee", todo)
+      end
+
+      result
+    end
+
     private
 
     # TODO: this may async in a background job with retry.
