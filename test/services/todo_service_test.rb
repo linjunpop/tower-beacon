@@ -33,4 +33,10 @@ class TodoServiceTest < ActiveSupport::TestCase
 
     assert @todo.deleted_at
   end
+
+  test "mark todo as done" do
+    TodoService.mark_todo_as_done(@todo)
+
+    assert @todo.status == "done"
+  end
 end

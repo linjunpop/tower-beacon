@@ -20,7 +20,7 @@
     <tr>
       <th>Content</th>
       <th>Creator</th>
-      <th colspan="2"></th>
+      <th colspan="3"></th>
     </tr>
   </thead>
 
@@ -29,6 +29,7 @@
       <tr>
         <td><%= todo.content %></td>
         <td><%= todo.creator.username %></td>
+        <td><%= link_to "Mark as Done", mark_as_done_project_todo_path(@project, todo), method: :put %></td>
         <td><%= link_to 'Edit', edit_project_todo_path(@project, todo) %></td>
         <td><%= link_to 'Destroy', [@project, todo], method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>

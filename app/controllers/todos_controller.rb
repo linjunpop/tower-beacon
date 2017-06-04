@@ -1,6 +1,6 @@
 class TodosController < ApplicationController
   before_action :set_project
-  before_action :set_todo, only: [:show, :edit, :update, :destroy]
+  before_action :set_todo, only: [:show, :edit, :update, :destroy, :mark_as_done]
 
   # GET /todos
   # GET /todos.json
@@ -64,6 +64,16 @@ class TodosController < ApplicationController
     respond_to do |format|
       format.html { redirect_to project_todos_url(@project), notice: 'Todo was successfully destroyed.' }
       format.json { head :no_content }
+    end
+  end
+
+  def mark_as_done
+    respond_to do |format|
+      if TodoService.mark_todo_as_done(@todo)
+        format.html { redirect_to project_todos_path(@project), notice: 'Todo was successfully updated.' }
+      else
+        format.html { render :edit }
+      end
     end
   end
 

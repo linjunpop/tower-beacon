@@ -26,6 +26,14 @@ class TodoService
       result
     end
 
+    def mark_todo_as_done(todo)
+      if result = todo.update(status: :done)
+        create_event("mark_as_done", todo)
+      end
+
+      result
+    end
+
     private
 
     # TODO: this may async in a background job with retry.
