@@ -30,10 +30,9 @@ class TodosController < ApplicationController
   # POST /todos
   # POST /todos.json
   def create
-    @todo = Todo.new(todo_params)
-
+    @todo = TodoService.create_todo(todo_params)
     respond_to do |format|
-      if @todo.save
+      if @todo.persisted?
         format.html { redirect_to project_todos_path(@project), notice: 'Todo was successfully created.' }
         format.json { render :show, status: :created, location: @todo }
       else
