@@ -9,6 +9,13 @@
   </head>
 
   <body>
-    <%= yield %>
+    <nav>
+      <%= link_to "Teams", teams_path %>
+      <%= link_to "Projects", projects_path %>
+      <%= link_to "Events", events_path %>
+    </nav>
+    <main>
+      <%= yield %>
+    </main>
   </body>
 </html>
