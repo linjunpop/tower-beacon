@@ -17,16 +17,6 @@
   </div>
 
   <div class="field">
-    <%= form.label :status %>
-    <%= form.select :status, Todo.statuses.map { |key, value| [key.humanize, key] } %>
-  </div>
-
-  <div class="field">
-    <%= form.label :project_id %>
-    <%= form.select :project_id, Project.pluck(:title, :id) %>
-  </div>
-
-  <div class="field">
     <%= form.label :creator_id %>
     <%= form.select :creator_id, User.pluck(:username, :id) %>
   </div>

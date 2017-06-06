@@ -31,7 +31,7 @@ class TodosController < ApplicationController
   # POST /todos
   # POST /todos.json
   def create
-    @todo = TodoService.create_todo(todo_params)
+    @todo = TodoService.create_todo(scope: @project.todos, attrs: todo_params)
     respond_to do |format|
       if @todo.persisted?
         format.html { redirect_to project_todos_path(@project), notice: 'Todo was successfully created.' }

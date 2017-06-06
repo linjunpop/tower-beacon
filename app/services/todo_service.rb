@@ -1,7 +1,7 @@
 class TodoService
   class << self
-    def create_todo(attrs)
-      todo = Todo.new(attrs)
+    def create_todo(scope:Todo, attrs:)
+      todo = scope.new(attrs)
 
       if todo.save
         create_event("create", todo)
