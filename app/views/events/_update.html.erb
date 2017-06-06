@@ -1,0 +1,12 @@
+<div>
+  <p>
+  <%= event.user.display_name %>
+  <span>Update</span>
+  :
+  <%= render "events/links/#{event.target_type.downcase}", event: event %>
+  </p>
+  <p>
+    <%= event.created_at %>
+  </p>
+</div>
+

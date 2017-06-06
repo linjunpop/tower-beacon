@@ -1,0 +1,11 @@
+<div>
+  <p>
+  <%= event.user.display_name %>
+  <%= render "events/custom/#{event.target_type.downcase}/#{event.meta["type"]}" %>
+  :
+  <%= render "events/links/#{event.target_type.downcase}", event: event %>
+  </p>
+  <p>
+    <%= event.created_at %>
+  </p>
+</div>

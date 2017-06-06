@@ -28,7 +28,7 @@ class TodoService
 
     def mark_todo_as_done(todo)
       if result = todo.update(status: :done)
-        create_event("mark_as_done", todo)
+        create_event("custom", todo, {type: :mark_as_done})
       end
 
       result
@@ -36,7 +36,7 @@ class TodoService
 
     def assign_todo(todo, assignee_id)
       if result = todo.update(assignee_id: assignee_id)
-        create_event("update_assignee", todo)
+        create_event("custom", todo, {type: :update_assignee})
       end
 
       result
@@ -45,12 +45,13 @@ class TodoService
     private
 
     # TODO: this may async in a background job with retry.
-    def create_event(action, todo)
+    def create_event(action, todo, meta={})
       Event.create(
         user_id: todo.creator_id,
         action: action,
         target: todo,
-        project_id: todo.project_id
+        project_id: todo.project_id,
+        meta: meta,
       )
     end
   end
