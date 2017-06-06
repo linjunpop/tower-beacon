@@ -1,3 +1,9 @@
-<% @events.each do |event| %>
-  <%= render event.action, event: event %>
+<% @grouped_events.each do |date, project_grouped_events| %>
+  <h2><%= date %></h2>
+  <% project_grouped_events.each do |project, events| %>
+    <h3><%= link_to project.title, project_path(project) %></h3>
+    <% events.each do |event| %>
+      <%= render event.action, event: event %>
+    <% end %>
+  <% end %>
 <% end %>
