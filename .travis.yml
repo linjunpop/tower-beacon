@@ -6,6 +6,6 @@ script:
   - bundle exec rails db:test:prepare
   - bundle exec rails test
 before_script:
-  - psql -c 'create database strano_test' -U postgres
+  - psql -c 'create database beacon_test' -U postgres
 services:
   - postgresql: "9.4"
