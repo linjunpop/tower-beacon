@@ -7,3 +7,5 @@ script:
   - bundle exec rails test
 before_script:
   - psql -c 'create database strano_test' -U postgres
+services:
+  - postgresql: "9.4"
