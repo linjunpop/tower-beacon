@@ -6,7 +6,8 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
-team = Team.find_or_create_by(name: "Suicide Squad")
+team = Team.find_or_create_by(name: "Blue")
+team_red = Team.find_or_create_by(name: "Red")
 
 project = Project.find_or_create_by(title: "Phoenix Project", description: "It's on fire", team_id: team.id)
 
@@ -15,4 +16,6 @@ another_user = User.find_or_create_by(username: "bender")
 
 membership = user.team_memberships.create!(team_id: team.id)
 
-accessment = project.accesses.create!(user_id: another_user.id, role: :guest)
+access = project.accesses.create!(user_id: another_user.id, role: :guest)
+
+todo = TodoService.create_todo(scope: project.todos, attrs: {content: "foobar", creator_id: user.id}) 
