@@ -10,10 +10,9 @@ class TodoServiceTest < ActiveSupport::TestCase
     attrs = {
       content: @todo.content,
       creator_id: @todo.creator_id,
-      project_id: @project.id,
       status: @todo.status
     }
-    todo = TodoService.create_todo(attrs)
+    todo = TodoService.create_todo(scope: @project.todos, attrs: attrs)
 
     assert todo.persisted? == true
   end
