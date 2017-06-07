@@ -13,4 +13,7 @@ Rails.application.routes.draw do
   resources :teams
 
   resources :events
+
+  root to: 'pages#home'
+  get "/:page", to: "pages#show"
 end
